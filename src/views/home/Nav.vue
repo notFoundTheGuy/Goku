@@ -18,15 +18,19 @@
 					curIndex = idx;
 				"
 				@mouseleave="isMenuActive = false"
+				@click="goto(curItem.link)"
 			>
 				<i class="corner">
-					{{ idx + 1 >= 10 ? (idx + 1) + '' : '0' + (idx + 1) }}
+					{{ idx + 1 >= 10 ? idx + 1 + '' : '0' + (idx + 1) }}
 				</i>
 				<p>{{ item.name }}</p>
 				<span>{{ item.desc }}</span>
 			</li>
 		</ul>
-		<div class="img-box" :style="{'background-image': `url(${curItem.img})`}"></div>
+		<div
+			class="img-box"
+			:style="{ 'background-image': `url(${curItem.img})` }"
+		></div>
 	</section>
 </template>
 
@@ -37,83 +41,94 @@ import img2 from '@/assets/nav-img/2.png';
 import img3 from '@/assets/nav-img/3.png';
 import img4 from '@/assets/nav-img/4.png';
 import img5 from '@/assets/nav-img/5.png';
+import router from '@/routers';
 
+const goto = (link: string) => {
+	router.push(link);
+};
 const navList = reactive([
 	{
 		name: '产品与交互',
 		desc: 'Products and Interactions',
 		img: img1,
+		link: '/detail',
 	},
 	{
 		name: '品牌与视觉',
 		desc: 'Brand and Vision',
 		img: img2,
+		link: '/detail',
 	},
 	{
 		name: '插画与艺术',
 		desc: 'Illustration and Art',
 		img: img3,
+		link: '/detail',
 	},
 	{
 		name: '影视与动效',
 		desc: 'Film and Animation',
 		img: img4,
+		link: '/detail',
 	},
 	{
 		name: '技术与开发',
 		desc: 'Our team',
 		img: img5,
+		link: '/detail',
 	},
 	{
 		name: '我们的团队',
 		desc: 'Contact us',
 		img: img1,
+		link: '/team',
 	},
 	{
 		name: '联系我们',
 		desc: 'Products and Interactions',
 		img: img2,
+		link: '/us',
 	},
-	{
-		name: '影视与动效',
-		desc: 'Products and Interactions',
-		img: img3,
-	},
-	{
-		name: '技术与开发',
-		desc: 'Products and Interactions',
-		img: img4,
-	},
-	{
-		name: '我们的团队',
-		desc: 'Products and Interactions',
-		img: img5,
-	},
-	{
-		name: '联系我们',
-		desc: 'Products and Interactions',
-		img: img1,
-	},
-	{
-		name: '影视与动效',
-		desc: 'Products and Interactions',
-		img: img2,
-	},
-	{
-		name: '技术与开发',
-		desc: 'Products and Interactions',
-		img: img3,
-	},
-	{
-		name: '我们的团队',
-		desc: 'Products and Interactions',
-		img: img4,
-	},
-	{
-		name: '联系我们',
-		desc: 'Products and Interactions',
-		img: img5,
-	},
+	// {
+	// 	name: '影视与动效',
+	// 	desc: 'Products and Interactions',
+	// 	img: img3,
+	// },
+	// {
+	// 	name: '技术与开发',
+	// 	desc: 'Products and Interactions',
+	// 	img: img4,
+	// },
+	// {
+	// 	name: '我们的团队',
+	// 	desc: 'Products and Interactions',
+	// 	img: img5,
+	// },
+	// {
+	// 	name: '联系我们',
+	// 	desc: 'Products and Interactions',
+	// 	img: img1,
+	// },
+	// {
+	// 	name: '影视与动效',
+	// 	desc: 'Products and Interactions',
+	// 	img: img2,
+	// },
+	// {
+	// 	name: '技术与开发',
+	// 	desc: 'Products and Interactions',
+	// 	img: img3,
+	// },
+	// {
+	// 	name: '我们的团队',
+	// 	desc: 'Products and Interactions',
+	// 	img: img4,
+	// },
+	// {
+	// 	name: '联系我们',
+	// 	desc: 'Products and Interactions',
+	// 	img: img5,
+	// },
 ]);
 
 const navEl = ref();
@@ -158,8 +173,8 @@ const scrollHandle = (e) => {
 
 onMounted(() => {
 	// 滚动特效
-	layoutEles();
-	navEl.value.addEventListener('scroll', scrollHandle);
+	// layoutEles();
+	// navEl.value.addEventListener('scroll', scrollHandle);
 });
 </script>
 
@@ -175,6 +190,7 @@ $paddingLeft: 18.75vw;
 	height: 100%;
 	.nav {
 		padding-top: $distanceTop;
+		padding-bottom: 5vw;
 		position: absolute;
 		left: $paddingLeft;
 		top: 0;
@@ -210,16 +226,27 @@ $paddingLeft: 18.75vw;
 				transform: translateY(-50%);
 				text-align: right;
 				right: 0;
-				// -webkit-text-stroke: 0px transparent;
-				// color: #fff;
-				// opacity: 0;
-				// transition: all 0.3s;
 			}
-			&:hover {
-				color: #fff;
-				// span {
-				// 	opacity: 1;
-				// }
+		}
+	}
+	&.active {
+		.video-bg {
+			opacity: 0;
+		}
+
+		.nav {
+			li {
+				color: transparent;
+				opacity: 0.6;
+				-webkit-text-stroke: 1px #fff;
+				&:hover {
+					color: #fff;
+					opacity: 1;
+					-webkit-text-stroke: 0px transparent;
+					// span {
+					// 	opacity: 1;
+					// }
+				}
 			}
 		}
 	}
@@ -258,22 +285,10 @@ $paddingLeft: 18.75vw;
 		width: 1px;
 		background: rgba($color: #fff, $alpha: 0.4);
 		span {
-			// background: red;
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-		}
-	}
-
-	&.active {
-		.video-bg {
-			opacity: 0;
-		}
-
-		.nav {
-			color: transparent;
-			-webkit-text-stroke: 1px #fff;
 		}
 	}
 }
