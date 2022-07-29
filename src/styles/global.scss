@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'SourceHanSerifCN-Heavy';
+	src: url('../assets/fonts/SourceHanSerifCN-Heavy.otf');
+}
+
 body {
 	background: #090b0d;
 	color: #ffffff;
@@ -5,6 +10,7 @@ body {
 	font-size: 1.04vw;
 	// line-height: 1.43;
 	line-height: 1.5;
+	font-family: 'SourceHanSerifCN-Heavy';
 }
 
 h1 {

@@ -5,4 +5,4 @@ export default [
   new URL(`../assets/nav-img/4.png`, import.meta.url),
   new URL(`../assets/nav-img/5.png`, import.meta.url),
   new URL(`../assets/nav-bg.mp4`, import.meta.url),
-];
+]
