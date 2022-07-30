@@ -91,46 +91,6 @@ const navList = reactive([
     img: img2,
     link: '/us',
   },
-  // {
-  // 	name: '影视与动效',
-  // 	desc: 'Products and Interactions',
-  // 	img: img3,
-  // },
-  // {
-  // 	name: '技术与开发',
-  // 	desc: 'Products and Interactions',
-  // 	img: img4,
-  // },
-  // {
-  // 	name: '我们的团队',
-  // 	desc: 'Products and Interactions',
-  // 	img: img5,
-  // },
-  // {
-  // 	name: '联系我们',
-  // 	desc: 'Products and Interactions',
-  // 	img: img1,
-  // },
-  // {
-  // 	name: '影视与动效',
-  // 	desc: 'Products and Interactions',
-  // 	img: img2,
-  // },
-  // {
-  // 	name: '技术与开发',
-  // 	desc: 'Products and Interactions',
-  // 	img: img3,
-  // },
-  // {
-  // 	name: '我们的团队',
-  // 	desc: 'Products and Interactions',
-  // 	img: img4,
-  // },
-  // {
-  // 	name: '联系我们',
-  // 	desc: 'Products and Interactions',
-  // 	img: img5,
-  // },
 ])
 
 const navEl = ref()
