@@ -7,7 +7,9 @@
       </video>
     </div>
     <div class="progress">
-      <span>{{ indexStr }}</span>
+      <span class="line top"></span>
+      <span class="index">{{ indexStr }}</span>
+      <span class="line bottom"></span>
     </div>
     <ul class="nav" ref="navEl">
       <li
@@ -244,13 +246,22 @@ $paddingLeft: 18.75vw;
     left: 9vw;
     transform: translateY(-50%);
     height: 450px;
-    width: 1px;
-    background: rgba($color: #fff, $alpha: 0.4);
-    span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .line {
+      display: inline-block;
+      width: 1px;
+      flex-grow: 1;
+      background: rgba($color: #fff, $alpha: 0.4);
+    }
+
+    .index {
+      flex-shrink: 0;
+      transform: rotate(-90deg);
+      margin: 12px 0;
     }
   }
 }
