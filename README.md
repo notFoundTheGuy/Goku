@@ -8,8 +8,8 @@
 npm install font-spider -g
 ```
 
-- step two: npm run build
+- step two: 压缩test/font-test.html 下的常用字
 
-  先打包，然后使用工具对dist/index.html进行扫描: font-spider ./dist/index.html
+  font-spider ./test/font-test.html
 
 - step three: 拷贝压缩后的字体文件进行替换
