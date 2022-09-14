@@ -49,8 +49,6 @@ const currentProgress = toRef(props, 'progress')
 watch(
   () => currentProgress.value,
   (newProgress) => {
-    console.log(newProgress)
-
     if (currentProgress.value > 99) {
       showIntro.value = true
       showLogo.value = false

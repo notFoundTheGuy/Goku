@@ -1,13 +1,13 @@
 const imgPreloader = url => {
   return new Promise((resolve, reject) => {
     let image = new Image();
+    image.src = url;
     image.onload = () => {
       resolve();
     };
     image.onerror = () => {
       reject();
     };
-    image.src = url;
   });
 };
 export const imgsPreloader = imgs => {

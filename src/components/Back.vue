@@ -13,6 +13,7 @@ const goBack = () => {
 <style lang="scss" scoped>
 .back-btn {
 	position: fixed;
+	z-index: 99;
 	top: -4vw;
 	left: -4vw;
 	width: 15vw;
