@@ -24,7 +24,7 @@ const { title, subTitle, desc } = defineProps<Props>();
 .text-box {
 	margin-top: 140px;
 	position: relative;
-	padding-top: 54px;
+	padding: 54px 0;
 	display: flex;
   margin: 0 180px;
 	&::before {

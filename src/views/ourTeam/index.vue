@@ -61,6 +61,8 @@ const members = [
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: 0 8.33vw;
+
 	h3 {
 		margin-top: 4.93vw;
 		& + p {
@@ -70,7 +72,6 @@ const members = [
 	.gallery {
 		width: 100%;
 		margin-top: 9.31vw;
-		padding: 0 8.33vw;
 		display: flex;
 		flex-wrap: nowrap;
 		width: 100%;
