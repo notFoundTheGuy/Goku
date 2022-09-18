@@ -7,7 +7,9 @@
 		></Loading>
 		<div v-show="!isLoading">
 			<Back v-show="!hideBackBtn" />
-			<router-view />
+			<transition name="fade">
+				<router-view />
+			</transition>
 		</div>
 	</div>
 </template>
@@ -21,7 +23,6 @@ import { useRoute } from 'vue-router';
 import { watch, ref, onMounted } from 'vue';
 
 import { imgsPreloader } from '@/utils/imgPreloader.js';
-import imgPreloaderList from '@/utils/imgPreloaderList.js';
 import { fetchMenu, fetchArticles } from './common/service';
 import { useMenuStore } from '@/store/menu';
 import { useArticleStore } from '@/store/articles';
@@ -65,7 +66,7 @@ onMounted(async () => {
 		if (progressInterval) clearInterval(progressInterval);
 
 		progressInterval = setInterval(() => {
-			progress.value += 2;
+			progress.value += 50;
 			if (progress.value >= 100) {
 				clearInterval(progressInterval);
 			}
@@ -95,6 +96,15 @@ watch(
 </script>
 
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 1s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
 #app {
 	height: 100%;
 	width: 100%;

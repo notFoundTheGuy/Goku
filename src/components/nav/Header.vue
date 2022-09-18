@@ -1,6 +1,9 @@
 <template>
 	<section class="header">
-		<div class="title">
+		<div class="logo-wrap" v-show="props.showLogo">
+			<img src="../../assets/logo.png" alt="logo" />
+		</div>
+		<div class="title" v-show="props.title">
 			<h1>{{ props.title }}</h1>
 			<p>{{ props.subTitle }}</p>
 		</div>
@@ -17,36 +20,48 @@ const props = defineProps({
 	subTitle: {
 		type: String,
 	},
+	showLogo: {
+		type: Boolean,
+		default: false,
+	},
 });
 </script>
 
 <style lang="scss" scoped>
 .header {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 2;
-	padding: 0 8vw;
+	position: relative;
+	z-index: 30;
 	height: 50px;
-	margin-top: 80px;
 	width: 100%;
+	font-size: 14px;
 	.title {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
 		h1 {
-			font-size: 2.22vw;
-			line-height: 1.1;
-			letter-spacing: 0.8vw;
+			font-size: 32px;
+			line-height: 46px;
+			letter-spacing: 5px;
 			+ p {
 				font-sieze: 0.83vw;
 				color: rgba($color: #fff, $alpha: 0.6);
 			}
 		}
 	}
-
 	.music-bar {
 		position: absolute;
-		right: 8vw;
+		right: 0;
 		top: 50%;
 		transform: translateY(-50%);
+	}
+	.logo-wrap {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		img {
+			width: 160px;
+		}
 	}
 }
 </style>

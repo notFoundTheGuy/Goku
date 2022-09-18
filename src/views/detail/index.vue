@@ -1,22 +1,45 @@
 <template>
 	<div ref="container" class="detail">
 		<template v-for="(item, idx) in article" :key="idx">
-			<div v-if="item.type === 'base'">
-				<ArticleBox
-					:logo="item.content.logo"
+			<div v-if="item.type === 'title'">
+				<TitleBox
 					:title="item.content.title"
 					:subTitle="item.content.subTitle"
-					:time="item.content.time"
-					:members="item.content.members"
-					:intro="item.content.intro"
-					:sections="item.content.blocks"
 				/>
 			</div>
-			<article v-if="item.type === 'img'">
-				<ImgBox :value="item.content" />
+			<div v-if="item.type === 'intro'">
+				<IntroBox
+					:logo="item.content.logo"
+					:time="item.content.time"
+					:members="item.content.members"
+					:title="item.content.introTitle"
+					:detail="item.content.detail"
+				/>
+			</div>
+			<div v-if="item.type === 'text'">
+				<TextBox
+					:title="item.content.title"
+					:subTitle="item.content.subTitle"
+					:desc="item.content.desc"
+				/>
+			</div>
+			<article v-if="ImgBoxTypes.indexOf(item.type) > -1">
+				<ImgBox
+					:type="item.type"
+					:primers="item.content.primers"
+					:title="item.content.title"
+					:subTitle="item.content.subTitle"
+					:source="item.content.source"
+				/>
 			</article>
-			<article v-if="item.type === 'video'">
-				<VideoBox :value="item.content" />
+			<article v-if="VideoBoxTypes.indexOf(item.type) > -1">
+				<VideoBox
+					:type="item.type"
+					:primers="item.content.primers"
+					:title="item.content.title"
+					:subTitle="item.content.subTitle"
+					:source="item.content.source"
+				/>
 			</article>
 		</template>
 	</div>
@@ -24,10 +47,12 @@
 
 <!-- direction="vertical" -->
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
-import ImgBox from './ImgBox.vue';
-import VideoBox from './VideoBox.vue';
-import ArticleBox from './ArticleBox.vue';
+import { computed } from 'vue';
+import TitleBox from './Boxes/Title.vue';
+import IntroBox from './Boxes/Intro.vue';
+import TextBox from './Boxes/Text.vue';
+import ImgBox from './Boxes/Image.vue';
+import VideoBox from './Boxes/Video.vue';
 import { ref, onMounted } from 'vue';
 import { useArticleStore } from '@/store/articles';
 import router from '@/routers';
@@ -37,13 +62,13 @@ const articleStore = useArticleStore();
 const $route = router.currentRoute;
 const article = computed(() => {
 	const curId = Number($route.value.query?.aid);
-	console.log(curId);
-	console.log(curId);
 	return (
 		articleStore.articles?.find((item) => item.id === curId)?.sections ?? []
 	);
 });
 
+const ImgBoxTypes = ['text-full-img', 'full-img', 'center-img'];
+const VideoBoxTypes = ['text-full-video', 'full-video', 'center-video'];
 const container = ref(null as unknown as HTMLElement);
 
 const calcArticleSize = () => {
@@ -54,7 +79,10 @@ const calcArticleSize = () => {
 };
 onMounted(() => {
 	// TODO: 节流
-	calcArticleSize();
+	setTimeout(() => {
+		// 因为加了1s的router的切换动画，所以这里稍微延迟一下计算
+		calcArticleSize();
+	}, 1000);
 	window.onresize = calcArticleSize;
 });
 </script>

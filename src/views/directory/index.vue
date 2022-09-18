@@ -1,14 +1,17 @@
 <template>
 	<section class="directory">
-		<Header :title="selectMenu?.title" :subTitle="selectMenu?.desc" />
-		<Nav :list="articleList" @onMenuClick="onMenuClick" />
+		<Nav theme="vertical" :list="articleList" :title="selectMenu?.title" @onMenuClick="onMenuClick" >
+			<template #header>
+				<Header :title="selectMenu?.title" :subTitle="selectMenu?.desc" />
+			</template>
+		</Nav>
 	</section>
 </template>
 
 <script setup lang="ts">
-import Header from './Header.vue';
+import Header from 'comps/nav/Header.vue';
 import { computed } from 'vue';
-import Nav from 'comps/Nav.vue';
+import Nav from 'comps/nav/index.vue';
 import router from '@/routers';
 import { useMenuStore } from '@/store/menu';
 

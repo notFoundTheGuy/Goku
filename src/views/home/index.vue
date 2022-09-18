@@ -1,13 +1,21 @@
 <template>
 	<section class="home">
-		<Header />
-		<Nav :list="menuStore.menu ?? []" @onMenuClick="onMenuClick" hasFullBg />
+		<Nav
+			:list="menuStore.menu ?? []"
+			@onMenuClick="onMenuClick"
+			hasFullBg
+			showLogo
+		>
+			<template #header>
+				<Header showLogo/>
+			</template>
+		</Nav>
 	</section>
 </template>
 
 <script setup lang="ts">
-import Header from './Header.vue';
-import Nav from 'comps/Nav.vue';
+import Header from 'comps/nav/Header.vue';
+import Nav from 'comps/nav/index.vue';
 import router from '@/routers';
 import { useMenuStore } from '@/store/menu';
 

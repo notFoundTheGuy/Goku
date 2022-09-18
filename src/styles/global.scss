@@ -3,40 +3,43 @@
 	src: url('../assets/fonts/SourceHanSerifCN-Heavy.ttf');
 }
 
+img {
+	pointer-events: none;
+}
 body {
 	background: #090b0d;
 	color: #ffffff;
-	// font-size: 14px;
-	font-size: 1.04vw;
+	font-size: 14px;
+	// font-size: 1.04vw;
 	// line-height: 1.43;
 	line-height: 1.5;
 	font-family: 'SourceHanSerifCN-Heavy';
 }
 
 h1 {
-	// font-size: 72px;
-	// line-height: 104px;
-	font-size: 5vw;
-	line-height: 7.2vw;
+	font-size: 72px;
+	line-height: 104px;
+	// font-size: 5vw;
+	// line-height: 7.2vw;
 }
 
 h2 {
-	// font-size: 56px;
-	// line-height: 80px;
-	font-size: 3.9vw;
-	line-height: 5.5vw;
+	font-size: 56px;
+	line-height: 80px;
+	// font-size: 3.9vw;
+	// line-height: 5.5vw;
 }
 
 h3 {
-	// font-size: 36px;
-	// line-height: 51px;
-	font-size: 2.5vw;
-	line-height: 3.5vw;
+	font-size: 36px;
+	line-height: 51px;
+	// font-size: 2.5vw;
+	// line-height: 3.5vw;
 }
 
 h4 {
-	// font-size: 24px;
-	// line-height: 35px;
-	font-size: 1.6vw;
-	line-height: 2.4vw;
+	font-size: 24px;
+	line-height: 35px;
+	// font-size: 1.6vw;
+	// line-height: 2.4vw;
 }
