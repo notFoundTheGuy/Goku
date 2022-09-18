@@ -66,7 +66,7 @@ onMounted(async () => {
 		if (progressInterval) clearInterval(progressInterval);
 
 		progressInterval = setInterval(() => {
-			progress.value += 50;
+			progress.value += 2;
 			if (progress.value >= 100) {
 				clearInterval(progressInterval);
 			}
