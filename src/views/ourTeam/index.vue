@@ -1,5 +1,5 @@
 <template>
-	<div class="about-us">
+	<div class="our-team">
 		<h3>我们的团队</h3>
 		<p>Our Team</p>
 		<ul class="gallery">
@@ -14,7 +14,9 @@
 			</li>
 		</ul>
 		<div class="progress">
-			<span>{{ indexStr }}</span>
+			<span class="line top"></span>
+			<span class="index">{{ indexStr }}</span>
+			<span class="line bottom"></span>
 		</div>
 	</div>
 </template>
@@ -56,22 +58,25 @@ const members = [
 </script>
 
 <style lang="scss" scoped>
-.about-us {
+.our-team {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 0 8.33vw;
+	box-sizing: content-box;
+	padding: 71px 120px;
+	margin: auto;
+	max-width: 1440px;
 
 	h3 {
-		margin-top: 4.93vw;
+		margin-top: 71px;
 		& + p {
 			opacity: 0.6;
 		}
 	}
 	.gallery {
 		width: 100%;
-		margin-top: 9.31vw;
+		margin-top: 134px;
 		display: flex;
 		flex-wrap: nowrap;
 		width: 100%;
@@ -82,25 +87,25 @@ const members = [
 			transition: all 0.3s;
 			cursor: pointer;
 			&:not(:last-child) {
-				margin-right: 5.56vw;
+				margin-right: 80px;
 			}
 			&:hover {
 				opacity: 1;
 			}
 			> p {
 				&:first-of-type {
-					font-size: 1.67vw;
+					font-size: 24px;
+					line-height: 35px;
 					font-weight: bold;
-					margin-top: 0.83vw;
+					margin-top: 12px;
 				}
 				&:last-of-type {
-					font-size: 0.97vw;
 					opacity: 0.4;
 				}
 			}
 			> .pic {
-				width: 19.44vw;
-				height: 24.03vw;
+				width: 280px;
+				height: 340px;
 				background-size: contain;
 			}
 		}
@@ -109,15 +114,24 @@ const members = [
 	.progress {
 		position: relative;
 		height: 1px;
-		width: 55vw;
-		background: rgba($color: #fff, $alpha: 0.4);
-		margin-top: 15vw;
-		margin-bottom: 4.93vw;
-		span {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+		width: 800px;
+		display: flex;
+		// background: rgba($color: #fff, $alpha: 0.4);
+		margin-top: 215px;
+		justify-content: space-between;
+		align-items: center;
+
+		.line {
+			display: inline-block;
+			height: 1px;
+			flex-grow: 1;
+			background: rgba($color: #fff, $alpha: 0.4);
+		}
+
+		.index {
+			font-size: 14px;
+			flex-shrink: 0;
+			margin: 0 12px;
 		}
 	}
 }

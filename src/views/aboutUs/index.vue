@@ -37,15 +37,18 @@
 	align-items: center;
 	flex-direction: column;
 	text-align: center;
-	padding: 4.93vw 22vw;
+	box-sizing: content-box;
+	padding: 71px 120px;
+	margin: auto;
+	max-width: 1440px;
 
 	h3 + p {
 		opacity: 0.6;
 	}
 	.us-pic {
-		margin-top: 1.39vw;
-		width: 50.83vw;
-		margin-bottom: -9vw;
+		margin-top: 20px;
+		width: 732px;
+		margin-bottom: -140px;
 		img {
 			width: 100%;
 		}
@@ -58,18 +61,17 @@
 	}
 
 	.content {
-		margin-top: 2.78vw;
-		padding-bottom: 5vw;
+		margin-top: 60px;
 		display: flex;
 		justify-content: space-between;
-		width: 100%;
+		width: 800px;
 		li {
 			text-align: left;
 			&:not(:last-child) {
-				margin-bottom: 1.39vw;
+				margin-bottom: 20px;
 			}
 			&:first-child {
-				margin-bottom: 2.08vw;
+				margin-bottom: 30px;
 				opacity: 0.6;
 			}
 		}

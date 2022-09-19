@@ -48,11 +48,11 @@
 <!-- direction="vertical" -->
 <script setup lang="ts">
 import { computed } from 'vue';
-import TitleBox from './Boxes/Title.vue';
-import IntroBox from './Boxes/Intro.vue';
-import TextBox from './Boxes/Text.vue';
-import ImgBox from './Boxes/Image.vue';
-import VideoBox from './Boxes/Video.vue';
+import TitleBox from './boxes/Title.vue';
+import IntroBox from './boxes/Intro.vue';
+import TextBox from './boxes/Text.vue';
+import ImgBox from './boxes/Image.vue';
+import VideoBox from './boxes/Video.vue';
 import { ref, onMounted } from 'vue';
 import { useArticleStore } from '@/store/articles';
 import router from '@/routers';
