@@ -43,3 +43,18 @@ h4 {
 	// font-size: 1.6vw;
 	// line-height: 2.4vw;
 }
+
+.motion {
+	transition: all .5s;
+	opacity: 0;
+
+	&.in-view {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	&.out-view {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+}
