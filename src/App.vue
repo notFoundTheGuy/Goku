@@ -3,7 +3,7 @@
 		<Loading
 			:progress="progress"
 			v-if="isLoading"
-			@loaded="isLoading = false"
+			@loaded="handleLoaded"
 		></Loading>
 		<div v-show="!isLoading">
 			<Back v-show="!hideBackBtn" />
@@ -26,6 +26,7 @@ import { imgsPreloader } from '@/utils/imgPreloader.js';
 import { fetchMenu, fetchArticles } from './common/service';
 import { useMenuStore } from '@/store/menu';
 import { useArticleStore } from '@/store/articles';
+import ScrollMotion from '@/utils/scrollMotion.js';
 
 const isLoading = ref(true);
 let progressInterval: any = null;
@@ -47,6 +48,11 @@ const initData = () => {
 			console.error('拉取信息失败：', err);
 		});
 };
+
+const handleLoaded = () => {
+	isLoading.value = false
+	new ScrollMotion('.motion', 100)
+}
 
 // 预加载部分主图
 const preloadNavImgs = () => {
