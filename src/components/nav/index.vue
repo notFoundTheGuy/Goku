@@ -15,7 +15,10 @@
 		</div>
 		<div class="nav-wrap">
 			<slot name="header"></slot>
-			<div class="progress">
+			<div
+				class="progress" 
+				:style="{'--progress-first-half': progressFirstHalf, '--progress-second-half': progressSecondHalf}"
+			>
 				<span class="line top"></span>
 				<span class="index">{{ indexStr }}</span>
 				<span class="line bottom"></span>
@@ -30,14 +33,19 @@
 							curIndex = idx;
 						}
 					"
-					@mouseleave="isMenuActive = false"
+					@mouseleave="
+						() => {
+							isMenuActive = false;
+							curIndex = -1;
+						}
+					"
 					@click="menuClick(curItem)"
 				>
 					<i class="corner">
-						{{ idx + 1 >= 10 ? idx + 1 + '' : '0' + (idx + 1) }}
+						{{ idx + 1 >= 10 ? `${idx + 1}` : `0${idx + 1}` }}
 					</i>
-					<p>{{ item.title }}</p>
-					<span>{{ item.desc }}</span>
+					<p>{{ item.desc }}</p>
+					<span>{{ item.title }}</span>
 				</li>
 			</ul>
 		</div>
@@ -80,13 +88,44 @@ const menuClick = (item: MenuItem) => {
 
 const isMenuActive = ref(false);
 // 当前选中项
-const curIndex = ref(0);
+const curIndex = ref(-1);
 const curItem = computed(() => {
 	return props.list[curIndex.value];
 });
 const indexStr = computed(() => {
 	const indexVal = curIndex.value + 1;
 	return indexVal >= 10 ? indexVal + '' : '0' + indexVal;
+});
+
+/**
+ * 计算 progress 的长度
+ * progress 总长度450px，indexStr 长度22px + 12px * 2 = 46px，样式
+ * progressFirst = progressSecond = (450 - 46) / 2 = 202px
+ */
+const getSingleProgressLength = () => {
+	const progressLength = 450;
+	const listLength: number = props.list.length;
+	return progressLength / listLength;
+}
+const progressFirstHalf = computed(() => {
+	if (curIndex.value === -1) {
+		return 0;
+	}
+	const currentProgressLength: number = (curIndex.value + 1) * getSingleProgressLength();
+	if (currentProgressLength <= 202) {
+		return currentProgressLength / 202;
+	}
+	return 1;
+});
+const progressSecondHalf = computed(() => {
+	if (curIndex.value === -1) {
+		return 0;
+	}
+	const currentProgressLength: number = (curIndex.value + 1) * getSingleProgressLength();
+	if (currentProgressLength >= 248) {
+		return (currentProgressLength - 248) / 202;
+	}
+	return 0;
 });
 </script>
 
@@ -120,10 +159,29 @@ $paddingLeft: 264px;
 			align-items: center;
 
 			.line {
-				display: inline-block;
+				display: inline-flex;
 				width: 1px;
 				flex-grow: 1;
 				background: rgba($color: #fff, $alpha: 0.4);
+			}
+
+			.top::before,
+			.bottom::before {
+				content: '';
+				display: block;
+				flex: 1;
+				width: 100%;
+				transition: transform .25s ease-out .05s;
+				background: rgba($color: #fff, $alpha: 1);
+				transform-origin: left top;
+			}
+
+			.top::before {
+				transform: scaleY(var(--progress-first-half));
+			}
+
+			.bottom::before {
+				transform: scaleY(var(--progress-second-half));
 			}
 
 			.index {
@@ -131,12 +189,13 @@ $paddingLeft: 264px;
 				flex-shrink: 0;
 				transform: rotate(-90deg);
 				margin: 12px 0;
+				letter-spacing: 3px;
+				line-height: 22px;
 			}
 		}
 		.nav {
-			padding: 80px 0 0 154px;
+			padding: 40px 0 0 154px;
 			height: 100%;
-			width: 50%;
 			font-weight: 800;
 			text-align: left;
 			overflow-x: visible;
@@ -145,26 +204,29 @@ $paddingLeft: 264px;
 				position: relative;
 				font-size: 32px;
 				line-height: 46px;
-				// height: 46px;
-				padding-bottom: 66px;
+				padding-bottom: 120px;
 				cursor: pointer;
 				display: flex;
+				flex-direction: column;
 				> p {
+					font-size: 64px;
+					line-height: 76px;
 					transform-origin: left;
 				}
 				i.corner {
-					position: absolute;
-					top: -10px;
-					left: -8px;
-					font-size: 12px;
-					line-height: 1;
+					position: relative;
+					bottom: -10px;
+					font-size: 20px;
+					line-height: 24px;
 					color: rgba($color: #fff, $alpha: 0.6);
 					-webkit-text-stroke: 1px transparent;
 				}
 				span {
 					flex: 1;
-					font-size: 12px;
-					text-align: right;
+					font-size: 20px;
+					line-height: 24px;
+					font-family: PingFangSC-Semibold, sans-serif;
+					color: rgba(255, 255, 255, 0.60);
 					white-space: nowrap;
 				}
 			}

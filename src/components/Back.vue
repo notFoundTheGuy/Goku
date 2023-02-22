@@ -1,10 +1,19 @@
 <template>
-	<div class="back-btn" @click="goBack">
-		<img src="../assets/back.svg" />
+	<div class="back-btn" @click="goBack" @mouseenter="changeArrow(true)" @mouseleave="changeArrow(false)">
+		<div class="arrow-content">
+			<img v-show="!hover" src="../assets/back.svg" />
+			<img v-show="hover" src="../assets/back-black.png" />
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+const hover = ref(false);
+const changeArrow = (status: boolean) => {
+	hover.value = status;
+	
+};
 const goBack = () => {
 	history.back();
 };
@@ -25,17 +34,20 @@ const goBack = () => {
 	border: 1px solid rgba(255, 255, 255, 0.4);
 	cursor: pointer;
 	transition: all 0.3s;
-	img {
-		width: 32px;
+	.arrow-content {
 		position: relative;
 		top: 15px;
 		left: 15px;
 		transform: rotate(45deg);
 		transition: all 0.3s;
 	}
+	img {
+		width: 32px;
+	}
 	&:hover {
 		transform: scale(1.2);
-		img {
+		background-color: rgb(255, 255, 255);
+		.arrow-content {
 			transform: rotate(0);
 		}
 	}

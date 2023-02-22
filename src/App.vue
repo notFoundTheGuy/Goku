@@ -3,9 +3,9 @@
 		<Loading
 			:progress="progress"
 			v-if="isLoading"
-			@loaded="isLoading = false"
+			@loaded="changeLoading"
 		></Loading>
-		<div v-show="!isLoading">
+		<div class="view" v-show="!isLoading">
 			<Back v-show="!hideBackBtn" />
 			<transition name="fade">
 				<router-view />
@@ -26,11 +26,14 @@ import { imgsPreloader } from '@/utils/imgPreloader.js';
 import { fetchMenu, fetchArticles } from './common/service';
 import { useMenuStore } from '@/store/menu';
 import { useArticleStore } from '@/store/articles';
+import { useDomCalStore } from '@/store/dom';
+import { throttle } from '@/utils/function.js'
 
 const isLoading = ref(true);
 let progressInterval: any = null;
 const progress = ref(0);
 
+const domCalStore = useDomCalStore();
 const menuStore = useMenuStore();
 const articlesStore = useArticleStore();
 
@@ -61,6 +64,23 @@ const preloadNavImgs = () => {
 	return imgsPreloader([...new Set(imgs)]);
 };
 
+const domCal = throttle(() => {
+	/**
+	 * 计算DOM偏移量的因子
+	 * 从 https://jonvieira.com/ 的源码中得来的数值
+	 */
+	const innerWidth = window.innerWidth
+	const innerHeight = window.innerHeight
+	domCalStore.factor = innerWidth * .00625
+	domCalStore.oY = innerHeight * 0.4
+	domCalStore.xDistance = 0.05 * innerWidth
+}, 500)
+
+const changeLoading = () => {
+	isLoading.value = false
+	menuStore.isLoading = false
+}
+
 onMounted(async () => {
 	const fakeLoad = () => {
 		if (progressInterval) clearInterval(progressInterval);
@@ -75,10 +95,13 @@ onMounted(async () => {
 	fakeLoad();
 	await initData();
 	await preloadNavImgs();
+	window.addEventListener('resize', domCal)
 	// TODO: 做真是的加载进度
 	// progress.value = 100;
 	// isLoading.value = false;
 });
+
+// TODO: 结束时销毁listener
 
 const HideBackRoutes = ['/'];
 const route = useRoute();
@@ -121,6 +144,9 @@ watch(
 	height: 100%;
 	> section {
 		width: 100%;
+		height: 100%;
+	}
+	.view {
 		height: 100%;
 	}
 }

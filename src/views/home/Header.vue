@@ -4,7 +4,7 @@
 		<div class="logo-wrap" v-show="props.showLogo">
 			<img src="../../assets/logo.png" alt="logo" />
 		</div>
-		<div class="music-bar">音乐  ——  开</div>
+		<!-- <div class="music-bar">音乐  ——  开</div> -->
 	</section>
 </template>
 

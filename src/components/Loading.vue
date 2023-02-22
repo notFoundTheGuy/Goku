@@ -3,13 +3,13 @@
     <img
       v-if="showLogo"
       class="single-logo"
-      src="../assets/single-logo.png"
+      src="../assets/logo.png"
       alt="logo"
     />
 
     <div class="intro-wrap" v-if="showIntro">
-      <div class="intro-text">你好～</div>
-      <div class="intro-text delay">这里是...</div>
+      <div class="intro-text">Hello～</div>
+      <div class="intro-text delay">This is...</div>
     </div>
 
     <img
@@ -82,8 +82,8 @@ watch(
   z-index: 99;
 
   .single-logo {
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 16px;
     @include fixed-center();
   }
 

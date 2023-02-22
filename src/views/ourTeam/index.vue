@@ -1,38 +1,49 @@
+
 <template>
 	<div class="our-team">
-		<h3>我们的团队</h3>
-		<p>Our Team</p>
+		<div class="team-intro" ref="mainTitle">
+			<h3>Our Team</h3>
+			<h5>The team members are from Fortune 500 companies and have sufficient experience in building products from 0 to 1</h5>
+		</div>
 		<ul class="gallery">
 			<li
 				v-for="(item, idx) in members"
 				:key="idx"
-				@mouseenter="curIndex = idx"
+				class="gallery-item"
 			>
-				<div class="pic" :style="{ backgroundImage: `url(${item.pic})` }"></div>
-				<p>{{ item.name }}</p>
-				<p>{{ item.role }}</p>
+				<div class="card-item">
+					<img class="pic" :src="item.pic" alt="团队成员照片" />
+					<p class="main-title">{{ item.name }}</p>
+					<p class="sub-title">{{ item.role }}</p>
+				</div>
+				<div class="vertical-line"></div>
+				<!-- <div class="horizontal-line"></div> -->
 			</li>
 		</ul>
-		<div class="progress">
-			<span class="line top"></span>
-			<span class="index">{{ indexStr }}</span>
-			<span class="line bottom"></span>
-		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
 import pic1 from '@/assets/team-pic/troyed.png';
 import pic2 from '@/assets/team-pic/lister.png';
 import pic3 from '@/assets/team-pic/ke.png';
 import pic4 from '@/assets/team-pic/azhi.png';
 
-const curIndex = ref(0);
-const indexStr = computed(() => {
-	const indexVal = curIndex.value + 1;
-	return indexVal >= 10 ? indexVal + '' : '0' + indexVal;
-});
+import { ref, watch } from 'vue';
+
+const props = defineProps({
+	txtTranslate: {
+		type: Boolean,
+		default: false,
+	},
+	domToTop: {
+		type: Number,
+		default: 0
+	}
+})
+
+const mainTitle = ref(null)
+
 const members = [
 	{
 		pic: pic1,
@@ -55,83 +66,146 @@ const members = [
 		role: 'azhi',
 	},
 ];
+
+watch(
+	() => props.domToTop,
+	(newVal) => {
+		if (!props.txtTranslate) {
+			return
+		}
+		const innerHeight = window.innerHeight
+		const x = newVal / innerHeight
+		const trans = 200 * newVal / innerHeight
+		mainTitle.value.style.transform = `translateY(-${trans}px)`
+	}
+)
 </script>
 
 <style lang="scss" scoped>
 .our-team {
-	text-align: center;
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	box-sizing: content-box;
-	padding: 71px 120px;
 	margin: auto;
 	max-width: 1440px;
+	height: 100%;
+
+	.team-intro {
+		position: absolute;
+		top: 176px;
+		left: 120px;
+		color: #000;
+		font-weight: bolder;
+		z-index: 2;
+	}
 
 	h3 {
-		margin-top: 71px;
-		& + p {
-			opacity: 0.6;
-		}
+		line-height: 120px;
+		font-size: 100px;
+	}
+	h5 {
+		line-height: 28px;
+		font-size: 24px;
+		width: 800px;
 	}
 	.gallery {
-		width: 100%;
-		margin-top: 134px;
+		position: relative;
 		display: flex;
 		flex-wrap: nowrap;
 		width: 100%;
+		height: 100%;
 		overflow-x: auto;
-		li {
-			text-align: left;
-			opacity: 0.6;
-			transition: all 0.3s;
-			cursor: pointer;
-			&:not(:last-child) {
-				margin-right: 80px;
-			}
-			&:hover {
-				opacity: 1;
-			}
-			> p {
-				&:first-of-type {
+		padding: 0 40px;
+		z-index: 1;
+
+		.gallery-item {
+			position: relative;
+			width: 320px;
+			height: 100%;
+			box-sizing: border-box;
+
+			.card-item {
+				position: relative;
+				opacity: 0.6;
+				transition: opacity 0.3s;
+				margin-top: 290px;
+				padding-left: 80px;
+				cursor: pointer;
+
+				&:hover {
+					opacity: 1;
+				}
+
+				.pic {
+					width: 240px;
+					height: 300px;
+					background-size: contain;
+					vertical-align: bottom;
+				}
+
+				.main-title {
 					font-size: 24px;
-					line-height: 35px;
-					font-weight: bold;
-					margin-top: 12px;
+					font-weight: bolder;
+					line-height: 28px;
+					margin-top: 15px;
 				}
-				&:last-of-type {
-					opacity: 0.4;
+
+				.sub-title {}
+			}
+			.vertical-line {
+				position: absolute;
+				top: 50%;
+				right: 0;
+				width: 1px;
+				height: 80%;
+				background-color: #000;
+				transform: translateY(-50%);
+
+				&::after,
+				&::before {
+					content: "";
+					position: absolute;
+					width: 1px;
+					height: 12.5%;
+				}
+
+				&::after {
+					top: -12.5%;
+					background: linear-gradient(to top, #000, rgb(29, 66, 255));
+				}
+
+				&::before {
+					bottom: -12.5%;
+					background: linear-gradient(to bottom, #000, rgb(29, 66, 255));
 				}
 			}
-			> .pic {
-				width: 280px;
-				height: 340px;
-				background-size: contain;
+
+			.horizontal-line {
+				position: relative;
+				top: -64px; // TODO: subtitle 的大小和行高
+				width: 100%;
+				height: 1px;
+				background-color: #000;
+
+				&::after,
+				&::before {
+					content: "";
+					position: absolute;
+					width: 40px;
+					height: 1px;
+				}
+
+				&::after {
+					right: -40px;
+					background: linear-gradient(to right, #000, rgb(29, 66, 255));
+				}
+				&::before {
+					left: -40px;
+					background: linear-gradient(to left, #000, rgb(29, 66, 255));
+					z-index: -1;
+				}
 			}
-		}
-	}
-
-	.progress {
-		position: relative;
-		height: 1px;
-		width: 800px;
-		display: flex;
-		// background: rgba($color: #fff, $alpha: 0.4);
-		margin-top: 215px;
-		justify-content: space-between;
-		align-items: center;
-
-		.line {
-			display: inline-block;
-			height: 1px;
-			flex-grow: 1;
-			background: rgba($color: #fff, $alpha: 0.4);
-		}
-
-		.index {
-			font-size: 14px;
-			flex-shrink: 0;
-			margin: 0 12px;
 		}
 	}
 }

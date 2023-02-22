@@ -2,6 +2,6 @@ import { defineStore } from 'pinia';
 
 export const useMenuStore = defineStore('menuStore', {
 	store: () => {
-		return { menu: [] };
+		return { menu: [], isLoading: true };
 	},
 });

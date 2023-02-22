@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'SourceHanSerifCN-Heavy';
-	src: url('../assets/fonts/SourceHanSerifCN-Heavy.ttf');
+	font-family: 'WorkSans-Bold';
+	src: url('../assets/fonts/WorkSans-Bold.ttf');
 }
 
 img {
@@ -9,11 +9,11 @@ img {
 body {
 	background: #090b0d;
 	color: #ffffff;
-	font-size: 14px;
+	// font-size: 14px;
 	// font-size: 1.04vw;
 	// line-height: 1.43;
 	line-height: 1.5;
-	font-family: 'SourceHanSerifCN-Heavy';
+	font-family: 'WorkSans-Bold';
 }
 
 h1 {

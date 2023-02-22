@@ -7,7 +7,7 @@
 			<h1>{{ props.title }}</h1>
 			<p>{{ props.subTitle }}</p>
 		</div>
-		<div class="music-bar">音乐 —— 开</div>
+		<!-- <div class="music-bar">音乐 —— 开</div> -->
 	</section>
 </template>
 
