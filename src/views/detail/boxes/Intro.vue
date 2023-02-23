@@ -1,5 +1,5 @@
 <template>
-	<div class="intro-box">
+	<div class="intro-box motion">
 		<div>
 			<p class="logo">
 				<img :src="logo" />

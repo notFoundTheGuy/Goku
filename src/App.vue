@@ -3,7 +3,7 @@
 		<Loading
 			:progress="progress"
 			v-if="isLoading"
-			@loaded="changeLoading"
+			@loaded="handleLoaded"
 		></Loading>
 		<div class="view" v-show="!isLoading">
 			<Back v-show="!hideBackBtn" />
@@ -28,6 +28,7 @@ import { useMenuStore } from '@/store/menu';
 import { useArticleStore } from '@/store/articles';
 import { useDomCalStore } from '@/store/dom';
 import { throttle } from '@/utils/function.js'
+import ScrollMotion from '@/utils/scrollMotion.js';
 
 const isLoading = ref(true);
 let progressInterval: any = null;
@@ -50,6 +51,12 @@ const initData = () => {
 			console.error('拉取信息失败：', err);
 		});
 };
+
+const handleLoaded = () => {
+	isLoading.value = false
+	menuStore.isLoading = false
+	new ScrollMotion('.motion', 100)
+}
 
 // 预加载部分主图
 const preloadNavImgs = () => {
@@ -75,11 +82,6 @@ const domCal = throttle(() => {
 	domCalStore.oY = innerHeight * 0.4
 	domCalStore.xDistance = 0.05 * innerWidth
 }, 500)
-
-const changeLoading = () => {
-	isLoading.value = false
-	menuStore.isLoading = false
-}
 
 onMounted(async () => {
 	const fakeLoad = () => {
