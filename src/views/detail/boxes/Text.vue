@@ -24,7 +24,7 @@ const { title, subTitle, desc } = defineProps<Props>()
 .text-box {
   margin-top: 140px;
   position: relative;
-  padding: 54px 0;
+  padding: 54px 0 140px;
   display: flex;
   margin: 0 180px;
   &::before {
@@ -51,9 +51,31 @@ const { title, subTitle, desc } = defineProps<Props>()
   }
 
   > ul {
-    li {
+    li:not(:last-of-type) {
       margin-bottom: 39px;
     }
+  }
+}
+</style>
+
+<!-- 临时处理：调整text-box中的标题，副标题大小 -->
+<style lang="scss" scoped>
+.text-box {
+  font-size: 17px;
+
+  h1 {
+    font-size: 64px;
+    line-height: 80px;
+  }
+
+  h3 {
+    font-size: 36px;
+    line-height: 60px;
+  }
+
+  h4 {
+    font-size: 21.3px;
+    line-height: 28px;
   }
 }
 </style>
