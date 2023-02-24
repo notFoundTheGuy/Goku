@@ -20,7 +20,7 @@
 			<p>{{ item.desc }}</p>
 			<span>{{ item.title }}</span>
 
-			<Teleport to="body" :key="idx">
+			<Teleport to="body">
 				<div
 					class="img-box"
 					:class="{ active: curIndex === idx }"

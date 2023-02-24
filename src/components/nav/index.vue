@@ -16,8 +16,11 @@
 		<div class="nav-wrap">
 			<slot name="header"></slot>
 			<div
-				class="progress" 
-				:style="{'--progress-first-half': progressFirstHalf, '--progress-second-half': progressSecondHalf}"
+				class="progress"
+				:style="{
+					'--progress-first-half': progressFirstHalf,
+					'--progress-second-half': progressSecondHalf,
+				}"
 			>
 				<span class="line top"></span>
 				<span class="index">{{ indexStr }}</span>
@@ -50,8 +53,11 @@
 			</ul>
 		</div>
 		<div
+			v-for="(item, idx) in props.list"
+			:key="idx"
 			class="img-box"
-			:style="{ 'background-image': `url(${curItem?.navImg})` }"
+			:class="{ active: curIndex === idx }"
+			:style="{ 'background-image': `url(${item?.navImg})` }"
 		></div>
 	</section>
 </template>
@@ -106,12 +112,13 @@ const getSingleProgressLength = () => {
 	const progressLength = 450;
 	const listLength: number = props.list.length;
 	return progressLength / listLength;
-}
+};
 const progressFirstHalf = computed(() => {
 	if (curIndex.value === -1) {
 		return 0;
 	}
-	const currentProgressLength: number = (curIndex.value + 1) * getSingleProgressLength();
+	const currentProgressLength: number =
+		(curIndex.value + 1) * getSingleProgressLength();
 	if (currentProgressLength <= 202) {
 		return currentProgressLength / 202;
 	}
@@ -121,7 +128,8 @@ const progressSecondHalf = computed(() => {
 	if (curIndex.value === -1) {
 		return 0;
 	}
-	const currentProgressLength: number = (curIndex.value + 1) * getSingleProgressLength();
+	const currentProgressLength: number =
+		(curIndex.value + 1) * getSingleProgressLength();
 	if (currentProgressLength >= 248) {
 		return (currentProgressLength - 248) / 202;
 	}
@@ -171,7 +179,7 @@ $paddingLeft: 264px;
 				display: block;
 				flex: 1;
 				width: 100%;
-				transition: transform .25s ease-out .05s;
+				transition: transform 0.25s ease-out 0.05s;
 				background: rgba($color: #fff, $alpha: 1);
 				transform-origin: left top;
 			}
@@ -226,7 +234,7 @@ $paddingLeft: 264px;
 					font-size: 20px;
 					line-height: 24px;
 					font-family: PingFangSC-Semibold, sans-serif;
-					color: rgba(255, 255, 255, 0.60);
+					color: rgba(255, 255, 255, 0.6);
 					white-space: nowrap;
 				}
 			}
@@ -264,6 +272,10 @@ $paddingLeft: 264px;
 		padding-top: 39.375%;
 		background-size: cover;
 		transition: all 0.5s;
+		opacity: 0;
+		&.active {
+			opacity: 1;
+		}
 	}
 
 	.video-bg {
