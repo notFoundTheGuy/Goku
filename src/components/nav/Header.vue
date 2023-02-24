@@ -43,7 +43,7 @@ const props = defineProps({
 			line-height: 46px;
 			letter-spacing: 5px;
 			+ p {
-				font-sieze: 0.83vw;
+				font-size: 0.83vw;
 				color: rgba($color: #fff, $alpha: 0.6);
 			}
 		}

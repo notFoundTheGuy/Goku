@@ -19,8 +19,8 @@ export default defineConfig({
 		postcss: {
 			plugins: [
 				postCssPxToRem({
-					rootValue: 256, // 1rem的大小
-					propList: ['font', 'font-size', 'line-height', 'letter-spacing'], // 需要转换的属性，这里选择全部都进行转换
+					rootValue: 128, // 1rem的大小
+					propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
 				})
 			]
 		}

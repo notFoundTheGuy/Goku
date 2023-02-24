@@ -66,12 +66,12 @@ watch(
 			return
 		}
 		const innerHeight = window.innerHeight
-		const height1 = 0.157 * innerHeight
+		const height1 = 0.295 * innerHeight
 		const height2 = 0.393 * innerHeight
-		const trans1 = height1 * newVal / innerHeight
-		const trans2 = height2 * newVal / innerHeight
-		mainTitle.value.style.transform = `translateY(-${trans1}px)`
-		content.value.style.transform = `translateY(-${trans2}px)`
+		const trans1 = height1 * newVal / innerHeight / 128
+		const trans2 = height2 * newVal / innerHeight / 128
+		mainTitle.value.style.transform = `translateY(-${trans1}rem)`
+		content.value.style.transform = `translateY(-${trans2}rem)`
 	}
 )
 </script>
@@ -88,7 +88,7 @@ watch(
 
 	.main-title {
 		position: absolute;
-		top: 16%;
+		top: 220px;
 	}
 
 	h3 {
@@ -106,7 +106,7 @@ watch(
 
 	.content {
 		position: absolute;
-		top: 60%;
+		top: 560px;
 		width: calc(100% - 120px);
 		display: flex;
 		justify-content: space-between;

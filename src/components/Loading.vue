@@ -3,7 +3,7 @@
     <img
       v-if="showLogo"
       class="single-logo"
-      src="../assets/logo.png"
+      src="../assets/single-logo.png"
       alt="logo"
     />
 

@@ -32,7 +32,6 @@ const aboutUsDomToTop = ref(0)
 const menuDomToTop = ref(0)
 
 const scrollEvent = throttle((e: WheelEvent) => {
-	// console.warn('222', e)
 	const teamDom = team.value
 	const aboutUsDom = aboutUs.value
 	const menuDom = menu.value
@@ -55,12 +54,13 @@ const scrollEvent = throttle((e: WheelEvent) => {
 
 	.header {
 		position: fixed;
-		top: 80px;
-		left: 120px;
+		top: 40PX;
+		left: 30PX;
+		height: 48PX;
 	}
 }
 .our-team {
-	height: 1000px;
+	height: 1100px;
 	background: rgb(29, 66, 255);
 }
 .connect-us {

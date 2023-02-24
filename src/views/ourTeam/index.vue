@@ -11,7 +11,7 @@
 				:key="idx"
 				class="gallery-item"
 			>
-				<div class="card-item">
+				<div class="card-item" ref="cardItem">
 					<img class="pic" :src="item.pic" alt="团队成员照片" />
 					<p class="main-title">{{ item.name }}</p>
 					<p class="sub-title">{{ item.role }}</p>
@@ -43,27 +43,28 @@ const props = defineProps({
 })
 
 const mainTitle = ref(null)
+const cardItem = ref(null)
 
 const members = [
 	{
 		pic: pic1,
-		name: 'troyed',
-		role: '主理人/产品用户体验设计',
+		name: 'Troyed',
+		role: 'UX',
 	},
 	{
-		pic: pic1,
-		name: 'lister',
-		role: '技术总监',
+		pic: pic2,
+		name: 'Sword',
+		role: 'Development Director',
 	},
 	{
-		pic: pic1,
-		name: 'troyed',
-		role: 'ke',
+		pic: pic3,
+		name: 'Ke',
+		role: 'FE',
 	},
 	{
-		pic: pic1,
-		name: 'troyed',
-		role: 'azhi',
+		pic: pic4,
+		name: 'Zhou',
+		role: 'Animator',
 	},
 ];
 
@@ -74,9 +75,14 @@ watch(
 			return
 		}
 		const innerHeight = window.innerHeight
-		const x = newVal / innerHeight
-		const trans = 200 * newVal / innerHeight
-		mainTitle.value.style.transform = `translateY(-${trans}px)`
+		cardItem.value.forEach((ele: Element) => {
+			const top = ele.getBoundingClientRect().bottom
+			const trans = 200 * top / innerHeight / 128
+			ele.style.transform = `translateY(-${trans}rem)`
+		})
+		const toTop = mainTitle.value.getBoundingClientRect().bottom
+		const trans = 200 * toTop / innerHeight / 128
+		mainTitle.value.style.transform = `translateY(-${trans}rem)`
 	}
 )
 </script>
@@ -93,7 +99,7 @@ watch(
 
 	.team-intro {
 		position: absolute;
-		top: 176px;
+		top: 220px;
 		left: 120px;
 		color: #000;
 		font-weight: bolder;
@@ -126,8 +132,10 @@ watch(
 			box-sizing: border-box;
 
 			.card-item {
-				position: relative;
-				opacity: 0.6;
+				position: absolute;
+				opacity: 0.8;
+				right: 0;
+				top: 330px;
 				transition: opacity 0.3s;
 				margin-top: 290px;
 				padding-left: 80px;
@@ -139,7 +147,7 @@ watch(
 
 				.pic {
 					width: 240px;
-					height: 300px;
+					height: 330px;
 					background-size: contain;
 					vertical-align: bottom;
 				}
@@ -151,7 +159,9 @@ watch(
 					margin-top: 15px;
 				}
 
-				.sub-title {}
+				.sub-title {
+					font-size: 14px;
+				}
 			}
 			.vertical-line {
 				position: absolute;
@@ -159,7 +169,7 @@ watch(
 				right: 0;
 				width: 1px;
 				height: 80%;
-				background-color: #000;
+				background-color: rgba(0, 0, 0, 0.1);
 				transform: translateY(-50%);
 
 				&::after,
@@ -172,38 +182,12 @@ watch(
 
 				&::after {
 					top: -12.5%;
-					background: linear-gradient(to top, #000, rgb(29, 66, 255));
+					background: linear-gradient(to top, rgba(0, 0, 0, 0.1), rgb(29, 66, 255));
 				}
 
 				&::before {
 					bottom: -12.5%;
-					background: linear-gradient(to bottom, #000, rgb(29, 66, 255));
-				}
-			}
-
-			.horizontal-line {
-				position: relative;
-				top: -64px; // TODO: subtitle 的大小和行高
-				width: 100%;
-				height: 1px;
-				background-color: #000;
-
-				&::after,
-				&::before {
-					content: "";
-					position: absolute;
-					width: 40px;
-					height: 1px;
-				}
-
-				&::after {
-					right: -40px;
-					background: linear-gradient(to right, #000, rgb(29, 66, 255));
-				}
-				&::before {
-					left: -40px;
-					background: linear-gradient(to left, #000, rgb(29, 66, 255));
-					z-index: -1;
+					background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgb(29, 66, 255));
 				}
 			}
 		}

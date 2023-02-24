@@ -198,7 +198,7 @@ $paddingLeft: 264px;
 			height: 100%;
 			font-weight: 800;
 			text-align: left;
-			overflow-x: visible;
+			overflow-x: hidden;
 			overflow-y: auto;
 			li {
 				position: relative;
