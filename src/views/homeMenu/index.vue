@@ -126,7 +126,7 @@ watch(
 		position: relative;
 		font-size: 32px;
 		line-height: 46px;
-		padding-bottom: 132px;
+		margin-bottom: 132px;
 		cursor: pointer;
 		display: flex;
 		flex-direction: column;

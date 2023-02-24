@@ -212,7 +212,7 @@ $paddingLeft: 264px;
 				position: relative;
 				font-size: 32px;
 				line-height: 46px;
-				padding-bottom: 120px;
+				margin-bottom: 120px;
 				cursor: pointer;
 				display: flex;
 				flex-direction: column;
