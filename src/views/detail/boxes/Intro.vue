@@ -39,6 +39,7 @@ const { logo, time, members, detail, title } = defineProps<Props>();
 	position: relative;
 	margin: 78px 180px 140px;
 	display: flex;
+	font-size: 17px;
 	// line-height: 20px;
 	&::before {
 		content: '';
@@ -61,6 +62,7 @@ const { logo, time, members, detail, title } = defineProps<Props>();
 	}
 	.members {
 		margin-top: 40px;
+		line-height: 1.7;
 	}
 	.time {
 		margin-top: 28px;
