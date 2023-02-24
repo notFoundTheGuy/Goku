@@ -41,6 +41,10 @@
 					:source="item.content.source"
 				/>
 			</article>
+			<!-- 长图格式，内容不限制在一屏中 -->
+			<section v-if="LongBoxTypes.indexOf(item.type) > -1">
+				<LongBox :type="item.type" :source="item.content.source" />
+			</section>
 		</template>
 	</div>
 </template>
@@ -53,6 +57,7 @@ import IntroBox from './boxes/Intro.vue';
 import TextBox from './boxes/Text.vue';
 import ImgBox from './boxes/Image.vue';
 import VideoBox from './boxes/Video.vue';
+import LongBox from './boxes/LongBox.vue';
 import { ref, onMounted } from 'vue';
 import { useArticleStore } from '@/store/articles';
 import router from '@/routers';
@@ -69,6 +74,7 @@ const article = computed(() => {
 
 const ImgBoxTypes = ['text-full-img', 'full-img', 'center-img'];
 const VideoBoxTypes = ['text-full-video', 'full-video', 'center-video'];
+const LongBoxTypes = ['long-img'];
 const container = ref(null as unknown as HTMLElement);
 
 const calcArticleSize = () => {
@@ -86,3 +92,13 @@ onMounted(() => {
 	window.onresize = calcArticleSize;
 });
 </script>
+
+<style lang="scss" scoped>
+.detail {
+	> article,
+	> section {
+		margin-bottom: 140px;
+		box-sizing: content-box;
+	}
+}
+</style>
