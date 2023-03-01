@@ -315,10 +315,6 @@ $paddingLeft: 264px;
 
 <style scoped lang="css">
 @media only screen and (min-width: 1800px) {
-	.nav-wrap {
-		width: 1560px;
-		margin: auto !important;
-	}
 	.img-box {
 		/* 16:9 */
 		width: 1350px !important;

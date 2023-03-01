@@ -116,7 +116,7 @@ watch(
 	margin: 120px 0 0 160px;
 	font-weight: 800;
 	text-align: left;
-	overflow-x: visible;
+	overflow-x: hidden;
 	overflow-y: auto;
 	z-index: 1;
 	&.nav-active .nav-item {

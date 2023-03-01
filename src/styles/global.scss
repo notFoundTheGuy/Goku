@@ -58,3 +58,9 @@ h4 {
 		transform: translateY(50px);
 	}
 }
+
+@media (max-width: 1000px) {
+    html {
+        font-size: 100PX !important;
+    }
+}

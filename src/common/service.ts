@@ -1,7 +1,9 @@
 const COS_URL = '//cheng-1253620824.cos.ap-chengdu.myqcloud.com';
 
 export const fetchMenu = () => {
-	return fetch(`${COS_URL}/menu.json`, {
+	const date = new Date()
+	const timestamp = date.getTime()
+	return fetch(`${COS_URL}/menu.json?v=${timestamp}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -10,7 +12,9 @@ export const fetchMenu = () => {
 };
 
 export const fetchArticles = () => {
-	return fetch(`${COS_URL}/articles.json`, {
+	const date = new Date()
+	const timestamp = date.getTime()
+	return fetch(`${COS_URL}/articles.json?v=${timestamp}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
