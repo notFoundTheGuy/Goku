@@ -82,8 +82,11 @@ const onMouseEnterItem = (idx: number) => {
 const domAddStyle = () => {
 	menuRefs.value.forEach((element: Element) => {
 		const innerHeight = window.innerHeight;
-		const toTop = element.getBoundingClientRect().top;
-		const x = toTop / innerHeight;
+		const boundingClientRect = element.getBoundingClientRect();
+		const toTop = boundingClientRect.top;
+		const bottomToTop = boundingClientRect.bottom;
+		const x = (bottomToTop + toTop) / 2 / innerHeight;
+		
 		let scale = -0.8 * Math.pow(x, 2) + 0.8 * x + 1;
 		if (scale <= 0) {
 			scale = 1;
